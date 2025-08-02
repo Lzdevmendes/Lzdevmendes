@@ -7,44 +7,6 @@ Tenho 22 anos e sou natural de São Paulo. Concluí o ensino médio na Colônia 
 🚀 Sobre mim
 Sou desenvolvedor Full Stack apaixonado por tecnologia, com foco em criar soluções escaláveis e bem estruturadas. Tenho experiência trabalhando em projetos do setor de frota de veículos e infraestrutura hídrica, sempre buscando implementar as melhores práticas de desenvolvimento.
 Atualmente trabalho como Assistente Administrativo na Obracon Engenharia (SABESP) e tenho experiência prévia como Front-End Developer em projetos de checklist para o mesmo grupo empresarial.
-💻 Stack Tecnológica
-Frontend:
-
-React, JavaScript, TypeScript
-Next.js, Material UI
-CSS modularizado, UI/UX
-
-Backend:
-
-Node.js, Express, NestJS
-Prisma ORM
-APIs RESTful
-
-Banco de Dados:
-
-PostgreSQL, MySQL, SQLite, MongoDB
-
-Metodologias & Ferramentas:
-
-Arquitetura Limpa, TDD, MVVM
-Princípios SOLID, YAGNI, KISS, DRY
-Git, GitFlow, CI/CD, Docker
-Scrum, Kanban
-
-📊 Experiência Profissional
-
-Obracon (Sabesp) - Front-End Developer (2024-2025)
-Cartão Elo - Analista de Atendimento (2023)
-GCB Manutenção (Petrobras) - Analista de Medição e Qualidade (2024)
-
-🌱 Sempre Aprendendo
-Estou constantemente me atualizando com as mais recentes tecnologias e melhores práticas de desenvolvimento, com foco em criar código limpo, testável e escalável.
-📫 Como me encontrar
-
-📧 Email: lzmendesdev@gmail.com
-💼 LinkedIn: www.linkedin.com/in/lzfbmendes
-📱 Instagram: @_.mendzzzz
-📍 São Paulo, Brazil
 
 <p align="left">
     <a href="https://www.youtube.com/@larissakich?sub_confirmation=1">
