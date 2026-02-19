@@ -68,12 +68,15 @@ galaxy_arms:
 #   arm: 0-2                  — Which galaxy arm to associate with (index)
 #   description: "..."        — Short description shown on the card
 projects:
-  - repo: "Lzdevmendes/project1"
+  - repo: "Lzdevmendes/Finance-app"
     arm: 0
-    description: "A web application built with React and Next.js."
-  - repo: "Lzdevmendes/project2"
+    description: "Aplicação de finanças pessoais."
+  - repo: "Lzdevmendes/Portfolio-terminal"
+    arm: 0
+    description: "Portfólio interativo em terminal."
+  - repo: "Lzdevmendes/Lz-Fullstack-Donalds"
     arm: 1
-    description: "API developed with Node.js and NestJS."
+    description: "Projeto fullstack de delivery."
 
 # Theme color overrides (optional — defaults to deep space palette)
 # All values must be valid hex color codes (#RRGGBB)
