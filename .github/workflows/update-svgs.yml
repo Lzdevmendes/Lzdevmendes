@@ -15,14 +15,14 @@ jobs:
       - name: Checkout profile repo
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PERSONAL_TOKEN }}
 
       - name: Checkout galaxy-profile generator
         uses: actions/checkout@v4
         with:
           repository: vinimlo/galaxy-profile
           path: galaxy-profile
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PERSONAL_TOKEN }}
 
       - name: Setup Python
         uses: actions/setup-python@v4
@@ -45,6 +45,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+          git remote set-url origin https://x-access-token:${{ secrets.PERSONAL_TOKEN }}@github.com/Lzdevmendes/Lzdevmendes.git
           git add assets/
           if git diff --staged --quiet; then
             echo "No changes to commit"
