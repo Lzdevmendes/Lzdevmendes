@@ -1,0 +1,54 @@
+name: Update Galaxy Profile SVGs
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs daily at midnight UTC
+  workflow_dispatch:     # Allows manual trigger
+  push:
+    branches: [main]     # Runs on push to main branch
+
+jobs:
+  update-svgs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout profile repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Checkout galaxy-profile generator
+        uses: actions/checkout@v4
+        with:
+          repository: vinimlo/galaxy-profile
+          path: galaxy-profile
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          cd galaxy-profile
+          pip install -r requirements.txt
+
+      - name: Generate SVGs
+        run: |
+          cd galaxy-profile
+          cp ../config.yml .  # Copy config from profile repo
+          GITHUB_TOKEN=${{ secrets.PERSONAL_TOKEN }} python -m generator.main
+          cp assets/generated/* ../assets/generated/
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add assets/
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update galaxy profile SVGs [automated]"
+            git push
+          fi
