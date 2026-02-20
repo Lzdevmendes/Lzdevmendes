@@ -89,11 +89,3 @@ Clean Architecture • SOLID • Design Patterns • Microsserviços • Perform
 </div>
 
 <br/>
-
-<p align="center">
-  <i>
-  "Professionalism and craftsmanship come from values that drive our discipline."
-  </i>
-  <br/>
-  — Robert C. Martin
-</p>
