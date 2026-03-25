@@ -33,11 +33,13 @@ jobs:
             cd galaxy-profile
             pip install -r requirements.txt
 
-        - name: Generate SVGs                                                   
+        - name: Generate SVGs
+          env:
+            GITHUB_TOKEN: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
           run: |
-            cd galaxy-profile                                                   
+            cd galaxy-profile
             cp ../config.yml .
-            GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} python -m generator.main
+            python -m generator.main
             cp assets/generated/* ../assets/generated/                          
                                                                                 
         - name: Commit and push changes                                         
