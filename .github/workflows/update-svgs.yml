@@ -39,6 +39,17 @@ jobs:
             cd galaxy-profile
             pip install -r requirements.txt
 
+        - name: DEBUG token identity
+          env:
+            TOK: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
+            HAS_PAT: ${{ secrets.PAT_TOKEN != '' }}
+          run: |
+            echo "Using PAT_TOKEN secret: $HAS_PAT"
+            echo "--- /user ---"
+            curl -s -H "Authorization: token $TOK" https://api.github.com/user | jq '{login, type}'
+            echo "--- scopes header ---"
+            curl -sI -H "Authorization: token $TOK" https://api.github.com/user | grep -i x-oauth-scopes || echo "no scopes header"
+
         - name: Generate SVGs
           env:
             GITHUB_TOKEN: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
@@ -46,7 +57,7 @@ jobs:
             cd galaxy-profile
             cp ../config.yml .
             python -m generator.main
-            cp assets/generated/* ../assets/generated/                          
+            cp assets/generated/* ../assets/generated/
                                                                                 
         - name: Commit and push changes
           run: |
