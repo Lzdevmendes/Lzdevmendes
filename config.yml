@@ -22,7 +22,9 @@ profile:
     Olá! Sou Luiz Felipe, tenho 22 anos e sou desenvolvedor Full Stack apaixonado por criar soluções tecnológicas escaláveis e eficientes. Natural de São Paulo, atuo no desenvolvimento de aplicações modernas, desde interfaces interativas até APIs robustas e arquiteturas bem estruturadas. Minha expertise abrange o desenvolvimento Front-End com React.js, Next.js e TypeScript, e Back-End com Node.js, NestJS, Python e FastAPI. Tenho experiência sólida em bancos de dados relacionais e NoSQL, containerização com Docker, e integração de APIs externas. Busco constantemente aprimorar minhas habilidades e aplicar as melhores práticas de desenvolvimento, incluindo princípios de Clean Architecture, SOLID e padrões de design. Compartilho meu conhecimento através dos meus projetos no GitHub, onde você pode acompanhar minha evolução e contribuições para a comunidade.
   philosophy: '"Professionalism and craftsmanship come from values that drive our discipline." — Robert C. Martin'
 
-# Social links displayed at the bottom of the profile
+# Social links consumed by the generator (email, linkedin, website only).
+# The LinkedIn/Instagram badges shown in README.md are maintained by hand and
+# are NOT driven by this section — update both places when changing socials.
 social:
   email: ""
   linkedin: "lzmendess"

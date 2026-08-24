@@ -9,19 +9,25 @@ on:
 
 jobs:
     update-svgs:
-      runs-on: ubuntu-latest                                                    
+      runs-on: ubuntu-latest
       permissions:
-        contents: write                                                         
-                  
+        contents: write
+        issues: write
+
       steps:
         - name: Checkout profile repo
           uses: actions/checkout@v4
 
-        - name: Checkout galaxy-profile generator                               
+        # Pinned to a fixed commit: vinimlo/galaxy-profile has no tags/releases,
+        # so tracking its default branch means an upstream change could break
+        # this workflow without warning. Bump this SHA manually (after testing)
+        # when you want to pick up new generator changes.
+        - name: Checkout galaxy-profile generator
           uses: actions/checkout@v4
-          with:                                                                 
+          with:
             repository: vinimlo/galaxy-profile
             path: galaxy-profile
+            ref: 5d4be766b4f9b76da9b7c6d9172fa6ba705e9b75
 
         - name: Setup Python
           uses: actions/setup-python@v4
@@ -42,14 +48,34 @@ jobs:
             python -m generator.main
             cp assets/generated/* ../assets/generated/                          
                                                                                 
-        - name: Commit and push changes                                         
-          run: |                                                                
+        - name: Commit and push changes
+          run: |
             git config --local user.email "action@github.com"
-            git config --local user.name "GitHub Action"                        
+            git config --local user.name "GitHub Action"
             git add assets/
-            if git diff --staged --quiet; then                                  
+            if git diff --staged --quiet; then
               echo "No changes to commit"
             else
               git commit -m "Update galaxy profile SVGs [automated]"
-              git push                                                          
+              git push
+            fi
+
+        # Runs only when a previous step failed. Reuses one open issue instead
+        # of creating a new one every day the workflow stays broken.
+        - name: Open or update failure issue
+          if: failure()
+          env:
+            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          run: |
+            gh label create automation-failure --repo "$GITHUB_REPOSITORY" \
+              --color B60205 --description "Scheduled workflow failed" --force
+            existing=$(gh issue list --repo "$GITHUB_REPOSITORY" --label automation-failure --state open --json number --jq '.[0].number')
+            if [ -n "$existing" ]; then
+              gh issue comment "$existing" --repo "$GITHUB_REPOSITORY" --body "Workflow failed again: $RUN_URL"
+            else
+              gh issue create --repo "$GITHUB_REPOSITORY" \
+                --title "Update Galaxy Profile SVGs workflow failed" \
+                --label automation-failure \
+                --body "The scheduled workflow failed. Check the run: $RUN_URL"
             fi
