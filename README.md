@@ -132,7 +132,3 @@ Clean Architecture • SOLID • Design Patterns • Microservices • Performan
 </div>
 
 <br/>
-
-<p align="center">
-  <sub>SVGs gerados por <a href="https://github.com/vinimlo/galaxy-profile">vinimlo/galaxy-profile</a> 🌌</sub>
-</p>
