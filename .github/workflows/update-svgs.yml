@@ -39,6 +39,14 @@ jobs:
             cd galaxy-profile
             pip install -r requirements.txt
 
+        - name: Update featured projects dynamically
+          env:
+            GITHUB_TOKEN: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
+          run: |
+            if [ -f .github/workflows/auto_projects.py ]; then
+              python .github/workflows/auto_projects.py
+            fi
+
         - name: Generate SVGs
           env:
             GITHUB_TOKEN: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}

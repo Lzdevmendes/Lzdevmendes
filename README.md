@@ -1,23 +1,31 @@
 <div align="center">
-  <img src="./assets/generated/galaxy-header.svg" width="850" alt="Galaxy Header"/>
+  <a href="https://github.com/Lzdevmendes">
+    <img src="./assets/generated/galaxy-header.svg" width="850" alt="Galaxy Header"/>
+  </a>
 </div>
 
 <br/>
 
 <div align="center">
-  <img src="./assets/generated/stats-card.svg" width="850" alt="Mission Telemetry"/>
+  <a href="https://github.com/Lzdevmendes?tab=repositories">
+    <img src="./assets/generated/stats-card.svg" width="850" alt="Mission Telemetry"/>
+  </a>
 </div>
 
 <br/>
 
 <div align="center">
-  <img src="./assets/generated/tech-stack.svg" width="850" alt="Tech Stack"/>
+  <a href="https://github.com/Lzdevmendes">
+    <img src="./assets/generated/tech-stack.svg" width="850" alt="Tech Stack"/>
+  </a>
 </div>
 
 <br/>
 
 <div align="center">
-  <img src="./assets/generated/projects-constellation.svg" width="850" alt="Featured Projects"/>
+  <a href="https://github.com/Lzdevmendes?tab=repositories">
+    <img src="./assets/generated/projects-constellation.svg" width="850" alt="Featured Projects"/>
+  </a>
 </div>
 
 <br/>
