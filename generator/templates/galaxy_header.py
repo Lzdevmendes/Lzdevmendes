@@ -164,9 +164,11 @@ def _build_spiral_arms(galaxy_arms, arm_colors, all_arm_points):
             sw = width_steps[seg]
             arm_paths.append(
                 f'    <path d="{seg_d}" fill="none" stroke="{color}" '
-                f'stroke-width="{sw:.1f}" opacity="{op:.2f}" stroke-linecap="round">'
-                f'\n      <animate attributeName="opacity" values="{op - 0.1:.2f};{op + 0.1:.2f};{op - 0.1:.2f}" '
-                f'dur="8s" begin="{arm_idx}s" repeatCount="indefinite"/>'
+                f'stroke-width="{sw:.1f}" opacity="{op:.2f}" stroke-linecap="round" '
+                f'stroke-dasharray="300" stroke-dashoffset="300">'
+                f'\n      <animate attributeName="stroke-dashoffset" from="300" to="0" dur="4s" begin="{arm_idx * 0.5}s" repeatCount="indefinite"/>'
+                f'\n      <animate attributeName="opacity" values="0;{op + 0.2:.2f};0" '
+                f'dur="4s" begin="{arm_idx * 0.5}s" repeatCount="indefinite"/>'
                 f'\n    </path>'
             )
 

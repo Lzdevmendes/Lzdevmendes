@@ -27,14 +27,16 @@ def render(stats: dict, metrics: list, theme: dict) -> str:
         delay = f"{i * 0.3}s"
 
         cells.append(f'''    <g class="metric-cell" transform="translate({cx}, 95)">
-      <g transform="translate(-8, -30) scale(1)">
-        <svg viewBox="0 0 16 16" width="16" height="16" fill="{icon_color}" class="metric-icon" style="animation-delay: {delay}">
-          {icon_path}
-        </svg>
+      <g class="floater" style="animation-delay: {delay}">
+        <g transform="translate(-8, -30) scale(1)">
+          <svg viewBox="0 0 16 16" width="16" height="16" fill="{icon_color}" class="metric-icon" style="animation-delay: {delay}">
+            {icon_path}
+          </svg>
+        </g>
+        <text x="0" y="2" text-anchor="middle" fill="{icon_color}" font-size="28" font-weight="bold" font-family="sans-serif" opacity="0.35" filter="url(#num-glow)">{value}</text>
+        <text x="0" y="2" text-anchor="middle" fill="{theme['text_bright']}" font-size="28" font-weight="bold" font-family="sans-serif">{value}</text>
+        <text x="0" y="20" text-anchor="middle" fill="{theme['text_faint']}" font-size="11" font-family="monospace" letter-spacing="1">{label}</text>
       </g>
-      <text x="0" y="2" text-anchor="middle" fill="{icon_color}" font-size="28" font-weight="bold" font-family="sans-serif" opacity="0.35" filter="url(#num-glow)">{value}</text>
-      <text x="0" y="2" text-anchor="middle" fill="{theme['text_bright']}" font-size="28" font-weight="bold" font-family="sans-serif">{value}</text>
-      <text x="0" y="20" text-anchor="middle" fill="{theme['text_faint']}" font-size="11" font-family="monospace" letter-spacing="1">{label}</text>
     </g>''')
 
         # Vertical divider between cells (not after last)
@@ -54,9 +56,16 @@ def render(stats: dict, metrics: list, theme: dict) -> str:
       .metric-icon {{
         animation: count-glow 4s ease-in-out infinite;
       }}
+      .floater {{
+        animation: float 6s ease-in-out infinite;
+      }}
       @keyframes count-glow {{
         0%, 100% {{ fill-opacity: 0.7; }}
         50% {{ fill-opacity: 1; }}
+      }}
+      @keyframes float {{
+        0%, 100% {{ transform: translateY(0); }}
+        50% {{ transform: translateY(-5px); }}
       }}
     </style>
     <filter id="num-glow" x="-30%" y="-30%" width="160%" height="160%">

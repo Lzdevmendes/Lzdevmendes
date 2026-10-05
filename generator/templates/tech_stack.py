@@ -31,6 +31,7 @@ def _build_language_bars(lang_data, theme, left_x, start_y):
       <text x="0" y="0" fill="{theme['text_dim']}" font-size="11" font-family="sans-serif" dominant-baseline="middle">{esc(lang['name'])}</text>
       <rect x="110" y="-6" width="{bar_w}" height="12" rx="3" fill="{lang['color']}" opacity="0.85">
         <animate attributeName="width" from="0" to="{bar_w}" dur="0.8s" begin="{delay}" fill="freeze"/>
+        <animate attributeName="opacity" values="0.6;1;0.6" dur="3s" begin="{delay}" repeatCount="indefinite"/>
       </rect>
       <text x="320" y="0" fill="{theme['text_faint']}" font-size="10" font-family="monospace" dominant-baseline="middle">{lang['percentage']}%</text>
     </g>''')
