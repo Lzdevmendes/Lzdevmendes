@@ -1,74 +1,74 @@
 name: Update Galaxy Profile SVGs
-  
-on:                                                                           
-    schedule:     
-      - cron: '0 0 * * *'                                                       
-    workflow_dispatch:
-    push:                                                                       
-      branches: [main]
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
 
 jobs:
-    update-svgs:
-      runs-on: ubuntu-latest
-      permissions:
-        contents: write
-        issues: write
+  update-svgs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
 
-      steps:
-        - name: Checkout profile repo
-          uses: actions/checkout@v4
+    steps:
+      - name: Checkout profile repo
+        uses: actions/checkout@v4
 
-        - name: Setup Python
-          uses: actions/setup-python@v4
-          with:                                                                 
-            python-version: '3.12'
-                                                                                
-        - name: Install dependencies
-          run: |
-            pip install -r requirements.txt
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
 
-        - name: Update featured projects dynamically
-          env:
-            GITHUB_TOKEN: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
-          run: |
-            if [ -f .github/workflows/auto_projects.py ]; then
-              python .github/workflows/auto_projects.py
-            fi
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
 
-        - name: Generate SVGs
-          env:
-            GITHUB_TOKEN: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
-          run: |
-            python -m generator.main
-                                                                                
-        - name: Commit and push changes
-          run: |
-            git config --local user.email "action@github.com"
-            git config --local user.name "GitHub Action"
-            git add assets/
-            if git diff --staged --quiet; then
-              echo "No changes to commit"
-            else
-              git commit -m "Update galaxy profile SVGs [automated]"
-              git push
-            fi
+      - name: Update featured projects dynamically
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
+        run: |
+          if [ -f .github/workflows/auto_projects.py ]; then
+            python .github/workflows/auto_projects.py
+          fi
 
-        # Runs only when a previous step failed. Reuses one open issue instead
-        # of creating a new one every day the workflow stays broken.
-        - name: Open or update failure issue
-          if: failure()
-          env:
-            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          run: |
-            gh label create automation-failure --repo "$GITHUB_REPOSITORY" \
-              --color B60205 --description "Scheduled workflow failed" --force
-            existing=$(gh issue list --repo "$GITHUB_REPOSITORY" --label automation-failure --state open --json number --jq '.[0].number')
-            if [ -n "$existing" ]; then
-              gh issue comment "$existing" --repo "$GITHUB_REPOSITORY" --body "Workflow failed again: $RUN_URL"
-            else
-              gh issue create --repo "$GITHUB_REPOSITORY" \
-                --title "Update Galaxy Profile SVGs workflow failed" \
-                --label automation-failure \
-                --body "The scheduled workflow failed. Check the run: $RUN_URL"
-            fi
+      - name: Generate SVGs
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
+        run: |
+          python -m generator.main
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add assets/
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update galaxy profile SVGs [automated]"
+            git push
+          fi
+
+      # Runs only when a previous step failed. Reuses one open issue instead
+      # of creating a new one every day the workflow stays broken.
+      - name: Open or update failure issue
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          gh label create automation-failure --repo "$GITHUB_REPOSITORY" \
+            --color B60205 --description "Scheduled workflow failed" --force
+          existing=$(gh issue list --repo "$GITHUB_REPOSITORY" --label automation-failure --state open --json number --jq '.[0].number')
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --repo "$GITHUB_REPOSITORY" --body "Workflow failed again: $RUN_URL"
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" \
+              --title "Update Galaxy Profile SVGs workflow failed" \
+              --label automation-failure \
+              --body "The scheduled workflow failed. Check the run: $RUN_URL"
+          fi
