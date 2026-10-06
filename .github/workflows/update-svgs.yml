@@ -43,13 +43,13 @@ jobs:
 
       - name: Commit and push changes
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.email "lzmendestechdev@gmail.com"
+          git config --local user.name "Lzdevmendes"
           git add assets/
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "Update galaxy profile SVGs [automated]"
+            git commit -m "Update galaxy profile SVGs [automated] [skip ci]"
             git push
           fi
 
