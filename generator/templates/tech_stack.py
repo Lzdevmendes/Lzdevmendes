@@ -99,47 +99,31 @@ def _build_radar_sectors(sector_data, rcx, rcy, radius, theme):
 
 
 def _build_radar_needle(rcx, rcy, radius, theme):
-    """Build the rotating radar needle group (sweep trail, wedges, tip glow).
-
-    Args:
-        rcx: radar center x
-        rcy: radar center y
-        radius: radar radius
-        theme: color palette dict
-
-    Returns:
-        SVG element string for the needle group
-    """
     scan_color = theme.get("synapse_cyan", "#00d4ff")
-    tip_x = rcx
-    tip_y = rcy - radius
-    # Sweep trail: 30-degree pie-slice arc behind the needle
-    sweep_d = svg_arc_path(rcx, rcy, radius, 330, 360)
-    # Outer wedge: triangle tapering from 2.5px half-width at center to tip
-    outer_hw = 2.5
-    # Inner bright core: narrower triangle (0.8px half-width)
-    inner_hw = 0.8
-
+    dur = 4.0
     needle = (
-        f'    <g>'
-        f'\n      <!-- Sweep trail -->'
-        f'\n      <path d="{sweep_d}" fill="{scan_color}" fill-opacity="0.07"/>'
-        f'\n      <!-- Outer wedge -->'
-        f'\n      <polygon points="{rcx - outer_hw},{rcy} {tip_x},{tip_y} {rcx + outer_hw},{rcy}" '
-        f'fill="{scan_color}" opacity="0.25"/>'
-        f'\n      <!-- Inner bright core -->'
-        f'\n      <polygon points="{rcx - inner_hw},{rcy} {tip_x},{tip_y} {rcx + inner_hw},{rcy}" '
-        f'fill="{scan_color}" opacity="0.5"/>'
-        f'\n      <!-- Tip glow -->'
-        f'\n      <circle cx="{tip_x}" cy="{tip_y}" r="2" fill="{scan_color}" opacity="0.6">'
-        f'\n        <animate attributeName="opacity" values="0.4;0.8;0.4" dur="2s" repeatCount="indefinite"/>'
-        f'\n      </circle>'
-        f'\n      <animateTransform attributeName="transform" type="rotate" '
-        f'from="0 {rcx} {rcy}" to="360 {rcx} {rcy}" '
-        f'dur="8s" repeatCount="indefinite"/>'
-        f'\n    </g>'
+        f'    <g>\\n'
+        f'      <!-- Radar Sweep Tail (Fading Wedges) -->\\n'
+        f'      <path d="M {rcx} {rcy} L {rcx-65} {rcy} A 65 65 0 0 1 {rcx-56.3} {rcy-32.5} Z" fill="{scan_color}" fill-opacity="0.03"/>\\n'
+        f'      <path d="M {rcx} {rcy} L {rcx-56.3} {rcy-32.5} A 65 65 0 0 1 {rcx-46} {rcy-46} Z" fill="{scan_color}" fill-opacity="0.08"/>\\n'
+        f'      <path d="M {rcx} {rcy} L {rcx-46} {rcy-46} A 65 65 0 0 1 {rcx-32.5} {rcy-56.3} Z" fill="{scan_color}" fill-opacity="0.15"/>\\n'
+        f'      <path d="M {rcx} {rcy} L {rcx-32.5} {rcy-56.3} A 65 65 0 0 1 {rcx-16.8} {rcy-62.8} Z" fill="{scan_color}" fill-opacity="0.3"/>\\n'
+        f'      <path d="M {rcx} {rcy} L {rcx-16.8} {rcy-62.8} A 65 65 0 0 1 {rcx} {rcy-65} Z" fill="{scan_color}" fill-opacity="0.55"/>\\n'
+        f'      <!-- Leading Edge Highlight -->\\n'
+        f'      <line x1="{rcx}" y1="{rcy}" x2="{rcx}" y2="{rcy-65}" stroke="{scan_color}" stroke-width="1.5" stroke-linecap="round" opacity="0.9">\\n'
+        f'        <animate attributeName="opacity" values="0.6;1.0;0.6" dur="0.5s" repeatCount="indefinite"/>\\n'
+        f'      </line>\\n'
+        f'      <!-- Center Core Glow -->\\n'
+        f'      <circle cx="{rcx}" cy="{rcy}" r="2.5" fill="#ffffff">\\n'
+        f'         <animate attributeName="opacity" values="0.8;1.0;0.8" dur="1s" repeatCount="indefinite"/>\\n'
+        f'      </circle>\\n'
+        f'      <circle cx="{rcx}" cy="{rcy}" r="6" fill="{scan_color}" fill-opacity="0.4">\\n'
+        f'         <animate attributeName="r" values="4;7;4" dur="2s" repeatCount="indefinite"/>\\n'
+        f'         <animate attributeName="opacity" values="0.2;0.6;0.2" dur="2s" repeatCount="indefinite"/>\\n'
+        f'      </circle>\\n'
+        f'      <animateTransform attributeName="transform" type="rotate" from="0 {rcx} {rcy}" to="360 {rcx} {rcy}" dur="{dur}s" repeatCount="indefinite"/>\\n'
+        f'    </g>'
     )
-
     return needle
 
 
@@ -209,16 +193,12 @@ def _build_radar_labels_and_dots(sector_data, galaxy_arms, rcx, rcy, radius, the
             dx = rcx + dot_r * math.cos(item_rad)
             dy = rcy + dot_r * math.sin(item_rad)
             # Timing: pulse fires when needle sweeps past this angle
-            pulse_begin = (item_angle / 360) * 8 - 0.3
-            if pulse_begin < 0:
-                pulse_begin += 8
+            
+            hit_time = (item_angle / 360.0) * 4.0
             parts.append(
-                f'    <circle cx="{dx:.1f}" cy="{dy:.1f}" r="3" '
-                f'fill="{sec["color"]}" opacity="0.35">'
-                f'\n      <animate attributeName="opacity" '
-                f'values="0.35;0.35;1.0;0.35;0.35" '
-                f'keyTimes="0;0.04;0.06;0.10;1" '
-                f'dur="8s" begin="{pulse_begin:.2f}s" repeatCount="indefinite"/>'
+                f'    <circle cx="{dx:.1f}" cy="{dy:.1f}" r="3" fill="{sec["color"]}" opacity="0.15">'
+                f'\n      <animate attributeName="opacity" values="1.0; 0.8; 0.4; 0.15; 0.15" keyTimes="0; 0.1; 0.3; 0.5; 1" dur="4.0s" begin="{hit_time:.2f}s" repeatCount="indefinite"/>'
+                f'\n      <animate attributeName="r" values="4.5; 3.5; 3; 3; 3" keyTimes="0; 0.1; 0.3; 0.5; 1" dur="4.0s" begin="{hit_time:.2f}s" repeatCount="indefinite"/>'
                 f'\n    </circle>'
             )
 
