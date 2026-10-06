@@ -27,7 +27,7 @@ def render(stats: dict, metrics: list, theme: dict) -> str:
         delay = f"{i * 0.3}s"
 
         cells.append(f'''    <g class="metric-cell" transform="translate({cx}, 95)">
-      <g class="floater" style="animation-delay: {delay}">
+      <g>
         <g transform="translate(-8, -30) scale(1)">
           <svg viewBox="0 0 16 16" width="16" height="16" fill="{icon_color}" class="metric-icon" style="animation-delay: {delay}">
             {icon_path}
@@ -56,16 +56,9 @@ def render(stats: dict, metrics: list, theme: dict) -> str:
       .metric-icon {{
         animation: count-glow 4s ease-in-out infinite;
       }}
-      .floater {{
-        animation: float 6s ease-in-out infinite;
-      }}
       @keyframes count-glow {{
         0%, 100% {{ fill-opacity: 0.7; }}
         50% {{ fill-opacity: 1; }}
-      }}
-      @keyframes float {{
-        0%, 100% {{ transform: translateY(0); }}
-        50% {{ transform: translateY(-5px); }}
       }}
     </style>
     <filter id="num-glow" x="-30%" y="-30%" width="160%" height="160%">
