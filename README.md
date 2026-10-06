@@ -135,7 +135,7 @@ Clean Architecture • SOLID • Design Patterns • Microservices • Performan
     <img src="https://img.shields.io/badge/LinkedIn-Luiz%20Felipe-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
   </a>
   <a href="https://www.instagram.com/lzmendes.dev/" target="_blank">
-    <img src="https://img.shields.io/badge/Instagram-@_.mendzzzz-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram"/>
+    <img src="https://img.shields.io/badge/Instagram-@lzmendes.dev-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram"/>
   </a>
 </div>
 
