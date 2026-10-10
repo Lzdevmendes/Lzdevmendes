@@ -166,9 +166,9 @@
     <circle cx="425.0" cy="85" r="8" fill="#00d4ff" opacity="0.15" filter="url(#proj-glow-1)"/>
     <circle cx="425.0" cy="85" r="5" fill="#00d4ff" opacity="0.7"><animate attributeName="opacity" values="0.5;0.9;0.5" dur="3s" begin="0.3s" repeatCount="indefinite"/><animate attributeName="r" values="4.5;5.5;4.5" dur="3s" begin="0.3s" repeatCount="indefinite"/></circle>
     <circle cx="425.0" cy="85" r="2" fill="#ffffff" opacity="0.9"/>
-    <text x="425.0" y="111" fill="#f1f5f9" font-size="14" font-weight="bold" font-family="sans-serif" text-anchor="middle">Mini-project-teste-bit</text>
-    <text x="425.0" y="129" fill="#94a3b8" font-size="11" font-family="sans-serif" text-anchor="middle">Portal de Solicitações Internas</text>
-    <text x="425.0" y="144" fill="#94a3b8" font-size="11" font-family="sans-serif" text-anchor="middle">desenvolvido co...</text>
+    <text x="425.0" y="111" fill="#f1f5f9" font-size="14" font-weight="bold" font-family="sans-serif" text-anchor="middle">litoralnapalma-web</text>
+    <text x="425.0" y="129" fill="#94a3b8" font-size="11" font-family="sans-serif" text-anchor="middle">Site institucional (landing</text>
+    <text x="425.0" y="144" fill="#94a3b8" font-size="11" font-family="sans-serif" text-anchor="middle">page) do aplicativo...</text>
     <rect x="392.5" y="163" width="65" height="18" rx="9" ry="9" fill="#00d4ff" opacity="0.12"/>
     <text x="425.0" y="175" fill="#00d4ff" font-size="9" font-family="monospace" text-anchor="middle" opacity="0.85">Backend</text>
   </g>
@@ -183,9 +183,9 @@
     <circle cx="697.5" cy="85" r="8" fill="#ffb020" opacity="0.15" filter="url(#proj-glow-2)"/>
     <circle cx="697.5" cy="85" r="5" fill="#ffb020" opacity="0.7"><animate attributeName="opacity" values="0.5;0.9;0.5" dur="3s" begin="0.6s" repeatCount="indefinite"/><animate attributeName="r" values="4.5;5.5;4.5" dur="3s" begin="0.6s" repeatCount="indefinite"/></circle>
     <circle cx="697.5" cy="85" r="2" fill="#ffffff" opacity="0.9"/>
-    <text x="697.5" y="111" fill="#f1f5f9" font-size="14" font-weight="bold" font-family="sans-serif" text-anchor="middle">Achados-do-futuro</text>
-    <text x="697.5" y="129" fill="#94a3b8" font-size="11" font-family="sans-serif" text-anchor="middle">Repositório atualizado</text>
-    <text x="697.5" y="144" fill="#94a3b8" font-size="11" font-family="sans-serif" text-anchor="middle">recentemente.</text>
+    <text x="697.5" y="111" fill="#f1f5f9" font-size="14" font-weight="bold" font-family="sans-serif" text-anchor="middle">lz-landing</text>
+    <text x="697.5" y="129" fill="#94a3b8" font-size="11" font-family="sans-serif" text-anchor="middle">Landing page comercial em</text>
+    <text x="697.5" y="144" fill="#94a3b8" font-size="11" font-family="sans-serif" text-anchor="middle">lz.dev.br para venda ...</text>
     <rect x="637.0" y="163" width="121" height="18" rx="9" ry="9" fill="#ffb020" opacity="0.12"/>
     <text x="697.5" y="175" fill="#ffb020" font-size="9" font-family="monospace" text-anchor="middle" opacity="0.85">DevOps &amp; Mobile</text>
   </g>
